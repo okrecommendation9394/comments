@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  min-height: 100%;
+}
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+body {
+  min-height: 100vh;
+  width: 100%;
+  background-color: hsl(228, 33%, 97%);
+}
+main {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.comments-section {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.comments-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.reply-container {
+  width: 100%;
+  height: 20%;
+  display: grid;
+  grid-template-areas: "image text btn";
+  grid-template-columns: min-content auto min-content;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+.reply-container img {
+  grid-area: image;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+.reply-container textarea {
+  grid-area: text;
+  width: 90%;
+  border: 1px solid hsl(223, 19%, 93%);
+  border-radius: 10px;
+  padding: 1rem;
+}
+.reply-container button {
+  grid-area: btn;
+  align-self: flex-start;
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(238, 40%, 52%);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+.replyClone {
+  width: 80%;
+}
+.wrapper,
+.myReply {
+  display: grid;
+  grid-template-areas: "score user control" "score comment comment" "score comment comment";
+  gap: 1rem;
+  grid-template-columns: auto 1fr auto;
+  color: hsl(211, 10%, 45%);
+  background-color: hsl(0, 0%, 100%);
+  position: relative;
+  padding: 1rem 0.2rem;
+  font-family: "Rubik";
+  margin-top: 1rem;
+}
+.myReply {
+  width: 99%;
+}
+.delete {
+  font-family: "Rubik";
+  margin-right: 0.4rem;
+  color: hsl(358, 79%, 66%);
+  font-weight: bold;
+}
+.edit {
+  font-family: "Rubik";
+  margin-right: 0.4rem;
+  font-weight: bold;
+}
+
+.wrapper::before,
+.myReply::before {
+  content: "";
+  background-color: hsl(211, 10%, 45%);
+  position: absolute;
+  min-height: 100%;
+  width: 1px;
+  left: -10px;
+}
+.score {
+  color: hsl(238, 40%, 52%);
+  background-color: hsl(228, 33%, 97%);
+  border-radius: 5px;
+  grid-area: score;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.4rem;
+  width: 1.7rem;
+  margin: 0.4rem;
+}
+.score-plus {
+  cursor: pointer;
+}
+.score-minus {
+  cursor: pointer;
+}
+.control {
+  grid-area: control;
+  display: flex;
+  align-self: center;
+  justify-self: flex-start;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+.control a {
+  align-items: center;
+}
+.user {
+  width: 100%;
+  grid-area: user;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  color: hsl(212, 24%, 26%);
+}
+.user-img {
+  height: 2rem;
+  width: 2rem;
+}
+.user-name {
+  font-weight: bold;
+}
+.text {
+  grid-area: comment;
+  width: 100%;
+  padding: 0.3rem;
+}
+.invisible {
+  display: none;
+}
