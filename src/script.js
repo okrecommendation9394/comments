@@ -1,159 +1,48 @@
 "use strict";
-import mydata from "../data.json" assert { type: "json" };
+import * as mydata from "../data.json";
 import "../src/reset.css";
 import "../src/index.css";
-// import { assert } from "console";
-// import { type } from "os";
-const data = {
-  currentUser: {
-    image: {
-      png: "./images/avatars/image-juliusomo.png",
-      webp: "./images/avatars/image-juliusomo.webp",
-    },
-    username: "juliusomo",
-  },
-  comments: [
-    {
-      id: 1,
-      content:
-        "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
-      createdAt: "1 month ago",
-      score: 12,
-      user: {
-        image: {
-          png: "./images/avatars/image-amyrobson.png",
-          webp: "./images/avatars/image-amyrobson.webp",
-        },
-        username: "amyrobson",
-      },
-      replies: [],
-    },
-    {
-      id: 2,
-      content:
-        "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
-      createdAt: "2 weeks ago",
-      score: 5,
-      user: {
-        image: {
-          png: "./images/avatars/image-maxblagun.png",
-          webp: "./images/avatars/image-maxblagun.webp",
-        },
-        username: "maxblagun",
-      },
-      replies: [
-        {
-          id: 3,
-          content:
-            "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
-          createdAt: "1 week ago",
-          score: 4,
-          replyingTo: "maxblagun",
-          user: {
-            image: {
-              png: "./images/avatars/image-ramsesmiron.png",
-              webp: "./images/avatars/image-ramsesmiron.webp",
-            },
-            username: "ramsesmiron",
-          },
-        },
-        {
-          id: 4,
-          content:
-            "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
-          createdAt: "2 days ago",
-          score: 2,
-          replyingTo: "ramsesmiron",
-          user: {
-            image: {
-              png: "./images/avatars/image-juliusomo.png",
-              webp: "./images/avatars/image-juliusomo.webp",
-            },
-            username: "juliusomo",
-          },
-        },
-      ],
-    },
-  ],
-};
-let input = "";
-const textarea = document.querySelector(".add-comment");
-textarea.addEventListener("input", () => {
-  input = textarea.value;
-});
-const comments = data.comments;
-const commentsContainer = document.querySelector(".comments-container");
-const replyContainer = document.querySelector(".reply-container");
+import {
+  addComment,
+  changeScore,
+  commentsContainer,
+  comments,
+  replyContainer,
+  data,
+  addReplies,
+  updates,
+} from "./app1.js";
 addComment(data.comments);
-function addComment(arr) {
-  arr.forEach((comment) => {
-    const wrapperHtml = ` <div class="wrapper">
-<div class="score">
-  <img
-    src="./images/icon-plus.svg"
-    alt="plus"
-    class="score score-plus"
-  />
-  <div class="number">${comment.score}</div>
-  <img
-    src="./images/icon-minus.svg"
-    alt="minus"
-    class="score score-minus"
-  />
-</div>
-<div class="control">
-  <a href="#" class="reply">
-    <img
-      src="./images/icon-reply.svg"
-      alt="rep"
-      class="reply-btn"
-    />Reply
-  </a>
-</div>
-<div class="user">
-  <img
-    src=${comment.user.image.webp}
-    alt="user1"
-    class='user-img'
-  />
-  <p class="user-name">${comment.user.username}</p>
-  <p>1 month ago</p>
-</div>
-<p class="text">
-  <span>${comment.content}</span
-  >
-</p>
-<div class='comment-replies'></div>
-</div>`;
-    const replies = document.createElement("div");
-    replies.classList.add("replies");
-    commentsContainer.insertAdjacentHTML("beforeend", wrapperHtml);
-    const wrappers = document.querySelectorAll(".wrapper");
-    console.log(wrappers);
-    const commentReplies = document.querySelector(".comment-replies");
-    // if (comment.replies.length) {
-    //   comment.replies.forEach((reply) => {
-    //     if (reply.user.username == "juliusomo") {
-    //       wrappers[1].insertAdjacentHTML("afterend", myReplyHtml);
-    //       console.log(reply.user.username);
-    //     }
-    //   });
-    // }
-  });
-}
-let initialScore = 0;
+changeScore();
 const replies = document.createElement("div");
 replies.classList.add("replies");
-const last = commentsContainer.lastChild;
-last.append(replies);
-const txt = document.querySelectorAll(".text");
+commentsContainer.appendChild(replies);
 const replyBtns = document.querySelectorAll(".reply");
 const replyContainerClone = replyContainer.cloneNode(true);
 replyContainerClone.classList.add("invisible");
 replyContainerClone.classList.add("replyClone");
+const sendClone = replyContainerClone.children[2];
+// sendClone.addEventListener("click", () => {
+//   let elemId = Number(replyContainerClone.previousSibling.id) - 1;
+//   data.comments[elemId].replies.push({
+//     content: `${replyContainer.children[2].value}`,
+//     createdAt: "just now",
+//     score: 2,
+//     replyingTo: "ramsesmiron",
+//     user: {
+//       image: {
+//         png: "./images/avatars/image-juliusomo.png",
+//         webp: "./images/avatars/image-juliusomo.webp",
+//       },
+//       username: "juliusomo",
+//     },
+//   });
+//   addReplies(replyContainerClone.previousSibling, data.comments[0].replies);
+//   replyContainerClone.remove();
+// });
 replyBtns.forEach((replyBtn) => {
   replyBtn.addEventListener("click", () => {
-    replyContainerClone.classList.toggle("invisible");
+    replyContainerClone.classList.remove("invisible");
     replyBtn.parentElement.parentElement.insertAdjacentElement(
       "afterend",
       replyContainerClone
@@ -161,36 +50,40 @@ replyBtns.forEach((replyBtn) => {
   });
 });
 //writing comment
-const sendBtn = document.getElementById("send-comment");
-sendBtn.addEventListener("click", () => {
-  let replyId = 0;
-  const reply = document.createElement("div");
-  reply.classList.add(`myReply`);
-  reply.innerHTML = `
+const sendBtns = [...document.querySelectorAll(".button-send")];
+sendBtns.push(sendClone);
+const editBtns = [...document.querySelectorAll(".edit")];
+const deleteBtns = [...document.querySelectorAll(".delete")];
+sendBtns.forEach((sendBtn) => {
+  sendBtn.addEventListener("click", (e) => {
+    let initialScore = 0;
+    const reply = document.createElement("div");
+    reply.classList.add(`myReply`);
+    reply.innerHTML = `
 <div class="score">
   <img
-    src="./images/icon-plus.svg"
+    src="../images/icon-plus.svg"
     alt="plus"
     class="score score-plus"
   />
-  <div class="number">${initialScore}</div>
+  <div class="number">0</div>
   <img
-    src="./images/icon-minus.svg"
+    src="../images/icon-minus.svg"
     alt="minus"
     class="score score-minus"
   />
 </div>
 <div class="control">
-  <a href="#" class="delete">
+  <a class="delete">
     <img
-      src="./images/icon-delete.svg"
+      src="../images/icon-delete.svg"
       alt="delete"
       class="delete-btn"
     />Delete
   </a>
-  <a href='#' class='edit'>
-  <img 
-  src='./images/icon-edit.svg'
+  <a class='edit'>
+  <img
+  src='../images/icon-edit.svg'
   alt="edit"
   class="edit-btn"/>Edit
   </a>
@@ -202,33 +95,88 @@ sendBtn.addEventListener("click", () => {
     class='user-img'
   />
   <p class="user-name">${data.currentUser.username}</p>
-  <p>1 month ago</p>
+  <div class='you'>You</div>
+  <p>${"Just now"}</p>
 </div>
 <p class="text" id="replyText">
-  <span class="text-wrapper">${input}</span>
+  <span class="text-wrapper">${e.target.previousElementSibling.value}</span>
 </p>
+<button type='button' class='update newComment'>Update</button>
 </div>
 `;
-  commentsContainer.appendChild(reply);
-  textarea.value = "";
-  textarea.placeholder = "Add new comment...";
-  const deleteComment = reply.querySelector(".delete");
-
-  deleteComment.addEventListener("click", () => {
-    commentsContainer.removeChild(reply);
-  });
-  const edit = reply.querySelector(".edit");
-  const textWrapper = document.querySelector(".text-wrapper");
-  let editable = false;
-  edit.addEventListener("click", () => {
-    const replyText = reply.querySelector(".text");
-    if (editable == false) {
-      editable = true;
-      replyText.style.backgroundColor = "hsl(228, 33%, 97%)";
+    updates.push(reply.querySelector(".update"));
+    reply.querySelector(".update").style.display = "none";
+    const min = reply.querySelector(".score-minus");
+    const plus = reply.querySelector(".score-plus");
+    const number = reply.querySelector(".number");
+    min.addEventListener("click", () => {
+      number.innerText = String(Number(number.innerText) - 1);
+    });
+    plus.addEventListener("click", () => {
+      number.innerText = String(Number(number.innerText) + 1);
+    });
+    if (
+      e.target.parentElement.previousElementSibling.classList.contains(
+        "comment-replies"
+      )
+    ) {
+      e.target.parentElement.previousElementSibling.parentElement.appendChild(
+        reply
+      );
+      e.target.parentElement.remove();
+    } else if (e.target.parentElement.classList.contains("replyClone")) {
+      e.target.parentElement.parentElement.children[2].appendChild(reply);
+      e.target.parentElement.remove();
     } else {
-      editable = false;
-      replyText.style.backgroundColor = "hsl(0, 0%, 100%)";
+      commentsContainer.appendChild(reply);
     }
-    replyText.contentEditable = editable;
+    e.target.previousElementSibling.value = "";
+    e.target.previousElementSibling.placeholder = "Add new comment...";
+    const deleteComment = reply.querySelector(".delete");
+    const edit = reply.querySelector(".edit");
+    editBtns.push(edit);
+    deleteBtns.push(deleteComment);
+    const textWrapper = document.querySelector(".text-wrapper");
   });
 });
+
+process();
+deleteProcess();
+function process() {
+  let editable = false;
+  editBtns.forEach((editBtn) => {
+    editBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      const replyText = editBtn.parentElement.parentElement.children[3];
+      editable = true;
+      replyText.style.backgroundColor = "hsl(228, 33%, 97%)";
+      const localUpdate =
+        e.currentTarget.parentElement.parentElement.children[4];
+      localUpdate.style.display = "block";
+      localUpdate.onclick = function (e) {
+        e.stopPropagation();
+        editable = false;
+        replyText.contentEditable = editable;
+        replyText.style.backgroundColor = "hsl(0, 0%, 100%)";
+        localUpdate.style.display = "none";
+      };
+      replyText.contentEditable = editable;
+    });
+  });
+}
+function deleteProcess() {
+  deleteBtns.forEach((deleteBtn) => {
+    deleteBtn.addEventListener("click", () => {
+      deleteBtn.parentElement.parentElement.remove();
+    });
+  });
+}
+editBtns.push = function () {
+  Array.prototype.push.apply(this, arguments);
+  process();
+};
+deleteBtns.push = function () {
+  Array.prototype.push.apply(this, arguments);
+  deleteProcess();
+};

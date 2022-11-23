@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "babel-node buildScripts/srcServer.js lint:watch",
     "localtunnel": "lt --port 3000",
@@ -13,6 +12,8 @@
     "lint": "eslint buildScripts --fix",
     "watchLint": "esw webpack.config.* src buildScripts --color",
     "lint:watch": "npm run watchLint --watch",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

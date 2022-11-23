@@ -70,7 +70,7 @@ main {
   padding: 0.5rem 1rem;
 }
 .replyClone {
-  width: 80%;
+  width: 100%;
 }
 .wrapper,
 .myReply {
@@ -87,6 +87,7 @@ main {
 }
 .myReply {
   width: 99%;
+  grid-template-areas: "score user control" "score comment comment" "score comment comment" "update update update";
 }
 .delete {
   font-family: "Rubik";
@@ -98,6 +99,13 @@ main {
   font-family: "Rubik";
   margin-right: 0.4rem;
   font-weight: bold;
+  color: hsl(238, 40%, 52%);
+}
+.reply {
+  font-family: "Rubik";
+  margin-right: 0.4rem;
+  font-weight: bold;
+  color: hsl(238, 40%, 52%);
 }
 
 .wrapper::before,
@@ -160,6 +168,47 @@ main {
   width: 100%;
   padding: 0.3rem;
 }
+.update {
+  grid-area: update;
+  background-color: hsl(238, 40%, 52%);
+  border: none;
+  color: hsl(0, 0%, 100%);
+  font-family: "Rubik";
+  padding: 0.6rem;
+  margin-right: 0.4rem;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.newComment {
+  width: 11%;
+  margin-left: 88%;
+}
 .invisible {
   display: none;
+}
+.reply-wrapper {
+  margin-top: 1rem;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-left: 10%;
+}
+.comment-replies {
+  justify-self: flex-end;
+  align-self: flex-end;
+}
+.replyTo {
+  font-weight: bold;
+  color: hsl(238, 40%, 52%);
+}
+.you {
+  background-color: hsl(238, 40%, 52%);
+  color: hsl(0, 0%, 100%);
+  font-weight: bold;
+  padding: 0.2rem;
+  border-radius: 4px;
+  font-family: "Rubik";
 }
