@@ -21,13 +21,13 @@ function addComment(arr) {
    <div class="wrapper" id=${comment.id}>
   <div class="score">
     <img
-      src="../images/icon-plus.svg"
+      src="./images/icon-plus.svg"
       alt="plus"
       class="score score-plus"
     />
     <div class="number">${comment.score}</div>
     <img
-      src="../images/icon-minus.svg"
+      src="./images/icon-minus.svg"
       alt="minus"
       class="score score-minus"
     />
@@ -35,7 +35,7 @@ function addComment(arr) {
   <div class="control">
     <a class="reply">
       <img
-        src="../images/icon-reply.svg"
+        src="./images/icon-reply.svg"
         alt="rep"
         class="reply-btn"
       />Reply
@@ -88,13 +88,13 @@ function addReplies(parent, arr) {
     <div class='comment-replies wrapper' id=${reply?.id}>
     <div class="score">
     <img
-      src="../images/icon-plus.svg"
+      src="./images/icon-plus.svg"
       alt="plus"
       class="score score-plus"
     />
     <div class="number">${reply?.score}</div>
     <img
-      src="../images/icon-minus.svg"
+      src="./images/icon-minus.svg"
       alt="minus"
       class="score score-minus"
     />
@@ -102,21 +102,21 @@ function addReplies(parent, arr) {
   <div class="control">
     <a class="reply">
       <img
-        src="../images/icon-reply.svg"
+        src="./images/icon-reply.svg"
         alt="rep"
         class="reply-btn"
       />Reply
     </a>
     <a class="delete">
     <img
-      src="../images/icon-delete.svg"
+      src="./images/icon-delete.svg"
       alt="delete"
       class="delete-btn"
     />Delete
   </a>
   <a class='edit'>
   <img 
-  src='../images/icon-edit.svg'
+  src='./images/icon-edit.svg'
   alt="edit"
   class="edit-btn"/>Edit
   </a>

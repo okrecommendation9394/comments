@@ -22,24 +22,6 @@ const replyContainerClone = replyContainer.cloneNode(true);
 replyContainerClone.classList.add("invisible");
 replyContainerClone.classList.add("replyClone");
 const sendClone = replyContainerClone.children[2];
-// sendClone.addEventListener("click", () => {
-//   let elemId = Number(replyContainerClone.previousSibling.id) - 1;
-//   data.comments[elemId].replies.push({
-//     content: `${replyContainer.children[2].value}`,
-//     createdAt: "just now",
-//     score: 2,
-//     replyingTo: "ramsesmiron",
-//     user: {
-//       image: {
-//         png: "./images/avatars/image-juliusomo.png",
-//         webp: "./images/avatars/image-juliusomo.webp",
-//       },
-//       username: "juliusomo",
-//     },
-//   });
-//   addReplies(replyContainerClone.previousSibling, data.comments[0].replies);
-//   replyContainerClone.remove();
-// });
 replyBtns.forEach((replyBtn) => {
   replyBtn.addEventListener("click", () => {
     replyContainerClone.classList.remove("invisible");
@@ -62,13 +44,13 @@ sendBtns.forEach((sendBtn) => {
     reply.innerHTML = `
 <div class="score">
   <img
-    src="../images/icon-plus.svg"
+    src="./images/icon-plus.svg"
     alt="plus"
     class="score score-plus"
   />
   <div class="number">0</div>
   <img
-    src="../images/icon-minus.svg"
+    src="./images/icon-minus.svg"
     alt="minus"
     class="score score-minus"
   />
@@ -76,14 +58,14 @@ sendBtns.forEach((sendBtn) => {
 <div class="control">
   <a class="delete">
     <img
-      src="../images/icon-delete.svg"
+      src="./images/icon-delete.svg"
       alt="delete"
       class="delete-btn"
     />Delete
   </a>
   <a class='edit'>
   <img
-  src='../images/icon-edit.svg'
+  src='./images/icon-edit.svg'
   alt="edit"
   class="edit-btn"/>Edit
   </a>
